@@ -15,6 +15,7 @@ const EditPrompt = () => {
     tag: "",
   });
   console.log(post);
+  
   useEffect(() => {
     const getPromptDetails = async () => {
       const res = await fetch(`/api/prompt/${promptId}`);

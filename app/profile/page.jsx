@@ -13,12 +13,10 @@ const MyProfile = () => {
 
   useEffect(() => {
     const fetchPrompts = async () => {
-      if (prompts.length === 0) {
-        const response = await fetch(`/api/user/${session?.user.id}/posts`);
-        const data = await response.json();
+      const response = await fetch(`/api/user/${session?.user.id}/posts`);
+      const data = await response.json();
 
-        setprompts(data);
-      }
+      setprompts(data);
     };
 
     if (session?.user.id) fetchPrompts();
