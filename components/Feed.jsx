@@ -37,6 +37,7 @@ const Feed = () => {
 
     fetchPrompts();
   }, []);
+  console.log(prompts);
 
   return (
     <section className="feed">
