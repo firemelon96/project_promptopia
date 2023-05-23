@@ -11,6 +11,16 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
   const pathName = usePathname();
   const router = useRouter();
 
+  const handleProfileClick = () => {
+    console.log(prompt);
+
+    if (prompt.creator._id === session?.user.id) return router.push("/profile");
+
+    router.push(
+      `/profile/${prompt.creator._id}?name=${prompt.creator.username}`
+    );
+  };
+
   const handleCopy = () => {
     setCopy(prompt.prompt);
     navigator.clipboard.writeText(prompt.prompt);
@@ -22,7 +32,10 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5 cursor-pointer">
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+        <div
+          className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
+          onClick={handleProfileClick}
+        >
           <Image
             src={prompt?.creator.image}
             alt="user_image"
@@ -58,7 +71,7 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
         className="font-inter text-sm blue_gradient cursor-pointer"
         onClick={() => handleTagClick && handleTagClick(prompt.tag)}
       >
-        {prompt.tag}
+        #{prompt.tag}
       </p>
 
       {session?.user.id === prompt.creator._id && pathName === "/profile" && (
