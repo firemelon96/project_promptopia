@@ -13,11 +13,9 @@ const Nav = () => {
   // /* will figure out the components runs twice the first is returning null
   useEffect(() => {
     const setUpProviders = async () => {
-      if (!providers) {
-        const response = await getProviders();
+      const response = await getProviders();
 
-        setProviders(response);
-      }
+      setProviders(response);
     };
     setUpProviders();
   }, []);
