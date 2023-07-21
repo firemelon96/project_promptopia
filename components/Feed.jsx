@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import PromptCard from "./PromptCard";
+import { useEffect, useState } from 'react';
+import PromptCard from './PromptCard';
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
-    <div className="mt-16 prompt_layout">
+    <div className='mt-16 prompt_layout'>
       {data.map((prompt) => (
         <PromptCard
           key={prompt._id}
@@ -21,12 +21,12 @@ const Feed = () => {
   const [allprompts, setAllPrompts] = useState([]);
 
   //Search states
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
   const fetchPosts = async () => {
-    const response = await fetch("/api/prompt");
+    const response = await fetch('/api/prompt', { next: { revalidate: 10 } });
     const data = await response.json();
 
     setAllPrompts(data);
@@ -37,7 +37,7 @@ const Feed = () => {
   }, []);
 
   const filterPrompts = (seacrchText) => {
-    const regex = new RegExp(seacrchText, "i");
+    const regex = new RegExp(seacrchText, 'i');
     return allprompts.filter(
       (item) =>
         regex.test(item.creator.username) ||
@@ -67,15 +67,15 @@ const Feed = () => {
   };
 
   return (
-    <section className="feed">
-      <form className="relative w-full flex-center">
+    <section className='feed'>
+      <form className='relative w-full flex-center'>
         <input
-          type="text"
-          placeholder="Search for a tag or a username"
+          type='text'
+          placeholder='Search for a tag or a username'
           value={searchText}
           onChange={handleSearchChange}
           required
-          className="search_input peer"
+          className='search_input peer'
         />
       </form>
 

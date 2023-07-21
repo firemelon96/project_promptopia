@@ -22,8 +22,6 @@ const MyProfile = () => {
     if (session?.user.id) fetchPrompts();
   }, []);
 
-  console.log(prompts);
-
   const handleEdit = (prompts) => {
     router.push(`/update-prompt?id=${prompts._id}`);
   };
